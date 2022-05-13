@@ -14,4 +14,4 @@ To create common gulpfile and its structure
 3.write gulp in the terminal
 4.Complete
 
-## Npm packages is in package.json obviosly
+## Npm packages is in package.json obviously
