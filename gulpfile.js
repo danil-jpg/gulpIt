@@ -1,19 +1,21 @@
-const gulp = require("gulp");
-// const less = require("less");
-const sass = require('gulp-sass')(require('sass'));
-const del = require("del");
-const cleanCss = require("gulp-clean-css");
-const rename = require("gulp-rename");
-const babel = require("gulp-babel");
-const uglify =  require("gulp-uglify");
-const concat = require("gulp-concat");
-const sourcemaps = require("gulp-sourcemaps");
-const autoPrefixer = require("gulp-autoprefixer");
-const imagein = require("gulp-imagemin");
-const htmlmin = require('gulp-htmlmin');
-const gulpSize = require("gulp-size");
-const newer = require("gulp-newer");
-var browserSync = require('browser-sync').create();
+import gulp from "gulp"
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+import del from "del";
+import cleanCss from "gulp-clean-css"
+import rename from "gulp-rename";
+import babel from "gulp-babel";
+import uglify from "gulp-uglify";
+import concat from "gulp-concat";
+import sourcemaps from "gulp-sourcemaps";
+import autoPrefixer from "gulp-autoprefixer";
+import imagein from "gulp-imagemin";
+import htmlmin from 'gulp-htmlmin';
+import gulpSize  from "gulp-size";
+import  newer from "gulp-newer";
+import name from "browser-sync";
+const browserSync = name.create()
+const sass = gulpSass(dartSass);
 
 const paths = {
 	html : {
@@ -68,10 +70,10 @@ function  scripts(){
 	}))
 	.pipe(uglify())
 	.pipe(concat("main.min.js"))
-	.pipe(sourcemaps.write("."))
 	.pipe(gulpSize(
 		{showFiles:  true}
 	))
+	.pipe(sourcemaps.write())
 	.pipe(gulp.dest(paths.scripts.dest))
 	.pipe(browserSync.stream())
 }
@@ -114,12 +116,11 @@ function minifyHtml(){
 
 const build =  gulp.series(clean,gulp.parallel(minifyHtml,styles,scripts,img),watch)
 
-
-exports.clean = clean;
-exports.styles = styles;
-exports.watch = watch;
-exports.build = build;
-exports.default = build;
-exports.scripts = scripts
-exports.img = img;
-exports.minifyHtml = minifyHtml
+export {clean}
+export { styles}
+export { watch}
+export { build }
+export {scripts }
+export { img}
+export {minifyHtml }
+export default build
